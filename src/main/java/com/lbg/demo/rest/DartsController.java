@@ -1,7 +1,10 @@
 package com.lbg.demo.rest;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +28,11 @@ public class DartsController {
 	@PostMapping("/create")
 	public ResponseEntity<DartGame> createDartGame(@RequestBody DartGame newDartGame) {
 		return this.service.createDartGame(newDartGame);
+	}
+
+	@GetMapping("/get")
+	public List<DartGame> getDartsGames() {
+		return this.service.getDartsGames();
 	}
 
 }
