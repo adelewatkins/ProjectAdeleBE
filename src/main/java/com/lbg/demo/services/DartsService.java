@@ -1,6 +1,7 @@
 package com.lbg.demo.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,15 @@ public class DartsService {
 
 	public List<DartGame> getDartsGames() {
 		return this.repo.findAll();
+	}
+
+	public ResponseEntity<DartGame> getDartsGames(int id) {
+		Optional<DartGame> found = this.repo.findById(id);
+		if (found.isEmpty()) {
+			return new ResponseEntity<DartGame>(HttpStatus.NOT_FOUND);
+		}
+		DartGame body = found.get();
+		return ResponseEntity.ok(body);
 	}
 
 }
