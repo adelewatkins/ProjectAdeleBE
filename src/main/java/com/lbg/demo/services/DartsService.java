@@ -38,4 +38,25 @@ public class DartsService {
 		return ResponseEntity.ok(body);
 	}
 
+	public ResponseEntity<DartGame> updateScore(int id, DartGame newDartGame) {
+		Optional<DartGame> found = this.repo.findById(id);
+
+		if (found.isEmpty()) {
+			return new ResponseEntity<DartGame>(HttpStatus.NOT_FOUND);
+		}
+		DartGame existing = found.get();
+
+		if (newDartGame.getP1Score() != null) {
+			existing.setP1Score(newDartGame.getP1Score());
+		}
+
+		if (newDartGame.getP2Score() != null) {
+			existing.setP2Score(newDartGame.getP2Score());
+		}
+
+		DartGame edited = this.repo.save(existing);
+
+		return ResponseEntity.ok(edited);
+	}
+
 }
